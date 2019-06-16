@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <!--<persistence-unit name="br.gov.bndes.sistema.garantias" transaction-type="JTA">-->
+    <persistence-unit name="testejtsoracle" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/testejtsoracle</jta-data-source>
+
+        <mapping-file>META-INF/orm.xml</mapping-file>
+
+        <class>com.kepler.ClienteOracle</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <!--<shared-cache-mode>NONE</shared-cache-mode>-->
+
+        <properties>
+            <!-- Websphere Liberty -->
+            <property name="eclipselink.target-database" value="Oracle" />
+            <!--<property name="eclipselink.session.customizer" value="br.gov.bndes.base.commons.jpa.eclipselink.BndesEclipselinkClientIdentifierAdapter" />-->
+            <property name="eclipselink.target-server" value="WebSphere_Liberty" />
+            <property name="eclipselink.allow-zero-id" value="false" />
+            <!--<property name="eclipselink.allow-zero-id" value="true" /> &lt;!&ndash; necessario pois por compatibilidade com o OPE uma entrada na tabela SituacaoOperacao possui ID ZERO&ndash;&gt;-->
+            <!--<property name="eclipselink.weaving" value="false"/>-->
+
+            <!--<property name="eclipselink.logging.logger" value="ServerLogger" />-->
+            <property name="eclipselink.logging.logger" value="DefaultLogger"/>
+            <property name="eclipselink.logging.level" value="INFO" />
+            <property name="eclipselink.logging.level.sql" value="FINE" />
+            <property name="eclipselink.logging.parameters" value="true" />
+            <property name="eclipselink.logging.timestamp" value="true" />
+            <property name="eclipselink.logging.session" value="true"/>
+            <property name="eclipselink.logging.thread" value="true"/>
+            <property name="eclipselink.logging.exceptions" value="true"/>
+
+
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+            <property name="eclipselink.jdbc.batch-writing.size" value="1000" />
+
+            <property name="eclipselink.refresh" value="true" />
+            <property name="eclipselink.query-results-cache" value="false" />
+            <property name="eclipselink.cache.shared.default" value="false" /> <!-- cache desabilitado por padrao -->
+            <!-- <property name="eclipselink.cache.shared.default" value="true" />-->
+            <property name="eclipselink.cache.size.default" value="200" />
+            <property name="eclipselink.cache.type.default" value="SOFT" />
+            <!-- <property name="eclipselink.cache.expiry.default" value="7200000"/> duas horas -->
+            <property name="eclipselink.cache.expiry.default" value="5000"/> <!-- cinco segundos / por causa do N11 -->
+        </properties>
+
+
+    </persistence-unit>
+
+    <persistence-unit name="testejtsmssql" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/testejtsmssql</jta-data-source>
+
+        <mapping-file>META-INF/orm.xml</mapping-file>
+
+        <class>com.kepler.ClienteMS</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <!-- Websphere Liberty -->
+            <property name="eclipselink.target-database" value="SQLServer" />
+            <property name="eclipselink.target-server" value="WebSphere_Liberty" />
+            <property name="eclipselink.allow-zero-id" value="false" />
+            <property name="eclipselink.weaving" value="false"/>
+
+            <!--<property name="eclipselink.logging.logger" value="ServerLogger" />-->
+            <property name="eclipselink.logging.logger" value="DefaultLogger"/>
+
+            <property name="eclipselink.logging.level" value="ALL" />
+            <property name="eclipselink.logging.level.sql" value="ALL" />
+
+            <property name="eclipselink.logging.parameters" value="true" />
+            <property name="eclipselink.logging.timestamp" value="true" />
+
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+            <property name="eclipselink.jdbc.batch-writing.size" value="1000" />
+
+            <property name="eclipselink.refresh" value="true" />
+            <property name="eclipselink.query-results-cache" value="false" />
+            <property name="eclipselink.cache.shared.default" value="true" />  <!-- cache desabilitado por padrao -->
+            <property name="eclipselink.cache.size.default" value="200" />
+            <property name="eclipselink.cache.type.default" value="SOFT" />
+            <property name="eclipselink.cache.expiry.default" value="7200000"/> <!-- duas horas -->
+
+        </properties>
+    </persistence-unit>
+</persistence>
